@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Madhu's Portfolio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+<style>
+
+/*======================================
+//--//-->   ABOUT
+======================================*/
+
+.about-mf .box-shadow-full {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.about-mf .about-img {
+  margin-bottom: 2rem;
+}
+
+.about-mf .about-img img {
+  margin-left: 10px;
+}
+
+/* .circular-image {
+  width: 100px;
+  height: 100px;
+
+  border-radius: 00%;
+
+  object-fit: cover;
+}  */
+.skill-mf .progress {
+  /* background-color: #cde1f8; */
+  margin: .5rem 0 1.2rem 0;
+  border-radius: 0;
+  height: .7rem;
+}
+
+.skill-mf .progress .progress-bar {
+  height: .7rem;
+  background-color: #ffbd39;
+}
+
+
+/* Animation styles */
+#typing-animation {
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(20, end) infinite;
+}
+
+#typing-animation:before {
+  content: "";
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #ccc;
+  animation: typing-cursor 0.5s ease-in-out infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes typing-cursor {
+  from {
+    width: 5px;
+  }
+  to {
+    width: 0;
+  }
+}
+
+
+/* project image zoom effect */
+
+.zoom-effect {
+  overflow: hidden;
+  transition: transform 0.3s ease-out;
+}
+
+.zoom-effect:hover {
+  transform: scale(1.1);
+}
+
+
+</style>
+
+
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Madhupriya</a>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+	          <li class="nav-item"><a href="#experience-section" class="nav-link"><span>Experience</span></a></li>
+	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
+			  <li class="nav-item"><a href="#education-section" class="nav-link"><span>Publications</span></a></li>
+	          <li class="nav-item"><a href="#Skills-and-Expertise" class="nav-link"><span>Skills and Expertise</span></a></li>
+			  <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+	  <section id="home-section" class="hero">
+		  <div class="home-slider  owl-carousel">
+	       <div class="slider-item ">
+	      	<div class="overlay"></div>
+	         <div class="container">
+	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+	          	<div class="one-third js-fullheight order-md-last img circular-image" style="background-image:url(images/round-me.png);background-size: 80%;border-radius: 00%;">
+	          	 <div class="overlay"></div>
+	          	</div>
+		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+		          	<div class="text">
+		          		<span class="subheading">Hello!</span>
+			            <h1 class="mb-4 mt-3">I'm <span>Madhupriya</span></h1>
+
+						<!-- Element to contain animated typing -->
+						<span id="typing-animation"></span>
+
+						<script>
+
+						// Initialize the typing animation
+						const typingAnimationElement = document.getElementById('typing-animation');
+
+						// Create an array of typing text
+						const typingTexts = [
+						'Analytical  ',
+						'Data Driven  ',
+						'Detail-Oriented   ',
+						];
+
+						// Create a function to display the typing animation for a given text
+						function playTypingAnimation(text) {
+						// Loop through each character and add it to the element
+						for (let i = 0; i < text.length; i++) {
+							setTimeout(() => {
+							typingAnimationElement.textContent += text[i];
+							}, i * 200); // Increase the delay to slow down the typing animation
+						}
+
+						// Once the animation is complete, reset the text and start over
+						setTimeout(() => {
+							typingAnimationElement.textContent = '';
+							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
+						}, text.length * 200);
+						}
+
+						// Start the typing animation loop
+						playTypingAnimation(typingTexts[0]);
+
+						</script>
+
+						<br>
+						<br>
+			            <h2>Data Scientist</h2>
+						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
+						<!-- <br> -->
+			            <p><a href="https://www.linkedin.com/in/madhu-priya-5b1884255/" target="_blank" class="btn btn-white btn-outline-white py-3 px-4">LinkedIn</a> 
+							<a href="https://github.com/MADHU-1412" target="_blank" class="btn btn-white btn-outline-white py-3 px-4">GitHub</a>
+							<!-- <a href="https://public.tableau.com/app/profile/sdabral/vizzes" target="_blank" class="btn btn-white btn-outline-white py-3 px-4">Tableau</a></p> -->
+							<a href="https://drive.google.com/file/d/11pS3IbNFYuICT3DU_wXI211zRbSgkbGt/view?usp=drive_link" target="_blank" class="btn btn-primary py-3 px-4">Download CV</a>
+		            </div>
+		          </div>
+	        	</div>
+	        </div>
+	      </div>
+		</div>
+    </section>
+
+	<section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
+		<div class="container">
+			<div class="row d-flex align-items-stretch">
+				<div class="col-md-12 pl-lg-5 pb-5">
+					<div class="row justify-content-start pb-3">
+						<div class="col-md-12 heading-section ftco-animate">
+							<h1 class="big">About</h1>
+							<h2 class="mb-4">About Me</h2>
+							<p>I’m a passionate Data Scientist with a strong foundation in Information Technology and a keen interest in data analysis and machine learning. A B.Tech graduate from Bharath University (CGPA 9.38), I’m skilled in Python, SQL, Power BI, TensorFlow, and Keras, with hands-on experience in predictive modeling, data visualization, and statistical analysis. I focus on transforming complex data into clear, actionable insights and strive to contribute to impactful, data-driven projects that foster learning and innovation.
+I enjoy exploring real-world problems through data and continuously expanding my technical and analytical expertise. My goal is to build intelligent solutions that combine accuracy, efficiency, and meaningful business impact.</p>
+							<ul class="about-info mt-4 px-md-0 px-2">
+								<li class="d-flex"><span>Profile:</span> <span>Data Science &amp; Analytics</span></li>
+								
+								<li class="d-flex"><span>Education:</span> <span>B. Tech in Information Technology (CGPA: 9.39/10)</span></li>
+								<li class="d-flex"><span>Language:</span> <span>English, Tamil</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+
+	<section class="ftco-section ftco-no-pb" id="experience-section" >
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+			</div>
+			
+			<div class="row">
+				<h1 class="big-4">Experience</h1>
+				<div class="underline"></div>
+			</div>
+			<br>
+			
+			<div class="row">
+			
+				<div class="col-12">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">Nov 2024 – Jan 2025</span>
+						<h2>Software Engineer Intern</h2>
+						<div class="position-container">
+							<span class="position">8 Queens Technology</span>
+							<!-- <img src="images/UHG.jpg" alt="UHG Logo" class="company-logo"> -->
+						</div>
+						<p class="mt-4">Technologies: SQL, Python (NumPy, Pandas), PowerBI, MySQL
+							<ul>
+								<li>Designed and maintained automation scripts and ETL pipelines to streamline data extraction and transformation</li>
+								<li>Collaborated on debugging and optimizing workflows, improving system efficiency and scalability.</li>
+								<li>Applied knowledge of data structures, algorithms, and database management to support data-driven software solutions.</li>
+								<li>Contributed to enhancing data processing reliability and overall software performance through continuous optimization.</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+	
+				<div class="col-12">
+					<div class="resume-wrap ftco-animate">
+						<span class="date">Sep 2023 – Feb 2024</span>
+						<h2>Machine Learning Intern</h2>
+						<div class="position-container">
+							<span class="position">HDLC Technology</span>
+							<!-- <img src="images/exp_3.jpg" alt="Ducat Logo" class="company-logo"> -->
+						</div>
+						<p class="mt-4">Technologies:- Python (Pandas, Matplotlib, scikit-learn), PowerBI, Excel.
+							<ul>
+								<li>Collected, cleaned, and preprocessed datasets to ensure high-quality data for machine learning model development.</li>
+								<li>Built and fine-tuned predictive models using Python (Pandas, Scikit-learn, NumPy) to identify key insights and improve data accuracy.</li>
+								<li>Assisted in creating end-to-end ML pipelines, including feature engineering, model evaluation, and performance tracking.</li>
+								<li>Developed visual dashboards and reports in Tableau to communicate model results and analytical findings effectively.</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+			</div>
+			
+			<style>
+				.position-container {
+					display: flex;
+					align-items: center;
+				}
+				.company-logo {
+					width: 90px; /* Adjust size as needed */
+					height: auto;
+					margin-left: 10px; /* Adjust spacing as needed */
+				}
+			</style>
+		</div>
+	</section>
+	
+	
+
+   
+    <section class="ftco-section ftco-no-pb" id="project-section">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+			</div>
+	
+			<div class="row">
+				<h1 class="big-4">Projects</h1>
+				<div class="underline"></div>
+			</div>
+			<br>
+        <div class="row d-flex">
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="https://github.com/MADHU-1412/Health-Insurance-Claim-Prediction" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/project11.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/MADHU-1412/Health-Insurance-Claim-Prediction" target="_blank">Predictive Claim Risk & Cost Modeling System for Health Insurance</a></h3>
+                <p>Built a stacked-ensemble claim prediction system with 160+ features, improving MAE by 22% and RMSE by 17%. Achieved AUC 0.92 and F1 0.84 for high-cost claims, enabling a 12% reduction in reserves and 6% lower loss ratio, deployed via containerised API with SHAP explainability.</p>
+				<!-- <p> Executed a Twitter API-based project for real-time data gathering, applying NLP techniques using NLTK library to attain a 90.2% sentiment analysis accuracy, and crafted interactive dashboards with statistical graphs and visualizations to deliver valuable insights.</p> -->
+              
+			</div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="https://github.com/MADHU-1412/EsgSentimentAnalytics/tree/main"  target="_blank" class="block-20 zoom-effect" style="background-image: url('images/project31.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/MADHU-1412/EsgSentimentAnalytics/tree/main" target="_blank">ESG Sentiment Analytics for Financial Decision-Making</a></h3>
+                <p>
+Built an end-to-end ESG sentiment classification pipeline using BERT and custom ESG features; achieved 89% accuracy, +35 F1 point uplift vs baseline, and identified positive ESG movers up to 10 days earlier than benchmark indices.
+
+				</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry">
+              <a href="https://github.com/MADHU-1412/Early-Disease-Detection-Using-Patient-Health-Records-EHR-" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/project21.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/MADHU-1412/Early-Disease-Detection-Using-Patient-Health-Records-EHR-" target="_blank">Early Disease Detection using EHR + Wearable Data</a></h3>
+                <p>Developed and deployed an explainable machine-learning system for early prediction of chronic disease (diabetes & heart disease) using patient EHR and wearable-sensor data, achieving a 92 % F1-score and improving recall by 19 % through advanced feature synthesis and ensemble learning.
+				</p>
+              </div>
+            </div>
+          </div>
+        </div>
+	<br>
+		<!-- added justify-content-center to center align the last two projects -->
+		<div class="row d-flex justify-content-center">  
+			<div class="col-md-4 d-flex ftco-animate">
+				<div class="blog-entry justify-content-end">
+				<a href="https://github.com/MADHU-1412/Multi-Modal-Recommendation-System/tree/main/" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/project41.jpg');">
+				</a>
+				<div class="text mt-3 float-right d-block">
+  
+				  <h3 class="heading"><a href="https://github.com/MADHU-1412/Multi-Modal-Recommendation-System/tree/main/" target="_blank">Multi-Modal Recommendation System</a></h3>
+				  <p>The system demonstrates that by combining multiple modalities, one can significantly boost recommendation accuracy (~13% RMSE reduction) and user-item retrieval quality (~47% higher Recall@10) compared to classic collaborative filtering.
+
+
+				</p>
+				</div>
+			  </div>
+			</div>
+			<div class="col-md-4 d-flex ftco-animate">
+				<div class="blog-entry justify-content-end">
+				<a href="https://github.com/MADHU-1412/Air-Quality-Forecasting-using-Time-Series-DL/blob/main/code.ipynb" target="_blank" class="block-20 zoom-effect" style="background-image: url('images/project51.jpg');">
+				</a>
+				<div class="text mt-3 float-right d-block">
+  
+				  <h3 class="heading"><a href="https://github.com/MADHU-1412/Air-Quality-Forecasting-using-Time-Series-DL/blob/main/code.ipynb" target="_blank">Air Quality Forecasting using Time-Series Deep Learning</a></h3>
+				  <p>Developed an air-quality forecasting model (LSTM/GRU) using 5 years of hourly data (~43k records), engineering 120+ features. Achieved MAE ~5.6 µg/m³ and RMSE ~8.3 µg/m³ (~15% better than baseline) and deployed results through real-time dashboards and API alerts.
+				  </p>
+				</div>
+			  </div>
+			</div>
+		 </div>
+	  </div>
+    </section>
+
+	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
+      <div class="container">
+      </div>
+	
+	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
+			<!-- <div class="container"> -->
+				<div class="row justify-content-center">
+					<div class="col-md-7 ftco-animate text-center">
+						<h2>More projects on<span> Github  </span> </h2>
+						<div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4>
+						<br>
+						<p><a href="https://github.com/MADHU-1412" target="_blank" class="btn btn-primary py-3 px-5">GitHub</a></p>
+						</div>
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+	</section>
+
+	<section class="ftco-section ftco-no-pb" id="education-section">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+			</div>
+	
+			<div class="row">
+				<h1 class="big-4">Research Publication</h1>
+				<div class="underline"></div>
+			</div>
+			<br>
+	
+			<div class="row">
+					
+				
+				<div class="col-md-6">
+  <div class="resume-wrap ftco-animate">
+    <!-- <span class="date">Publication</span> -->
+    <h2>
+      <a href="https://www.atlantis-press.com/proceedings/icarecs-25/126012913" target="_blank">
+        Intelligent Road Mark Detection Using YOLOv8 for Autonomous Navigation
+      </a>
+    </h2>
+    <p class="mt-4">
+      Designed an advanced YOLOv8-based model for precise and real-time road mark detection to support autonomous navigation systems.
+    </p>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="resume-wrap ftco-animate">
+    <!-- <span class="date">Publication</span> -->
+    <h2>
+      <a href="https://www.ijaresm.com/sign-language-recognition-using-graph-convolutional-networks-integrated-with-attention-and-residual-connections" target="_blank">
+        Sign Language Recognition Using Graph Convolutional Networks with Attention and Residual Connections
+      </a>
+    </h2>
+    <p class="mt-4">
+      Developed a deep learning model combining GCN with attention and residual layers for accurate and efficient sign language recognition.
+    </p>
+  </div>
+</div>
+
+				
+			</div>
+	
+			<!-- <div class="row justify-content-center mt-5">
+				<div class="col-md-6 text-center ftco-animate">
+					<p><a href="https://drive.google.com/file/d/1SnMdftdQC27V7Js_E49RN1Y0cMk8E4_z/view?usp=drive_link" class="btn btn-primary py-4 px-5" target="_blank">Download CV</a></p>
+				</div>
+			</div> -->
+		</div>
+	</section>
+	<section class="ftco-section ftco-no-pb" id="Skills-and-Expertise">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+			</div>
+	
+			<div class="row">
+				<h1 class="big-4">Skills and Expertise</h1>
+				<div class="underline"></div>
+			</div>
+			<br>
+	
+			<div class="row">
+				<div class="col-12">
+					<h2 class="big-5" style="color: #ffbd39;">Skills</h2>
+					<!-- <h2 class="big-5">Skills</h2> -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="skills-container">
+						<div class="btn btn-white btn-outline-white py-3 px-4">python</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">Machine Learning</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">Deep Learning</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">Computer Vision</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">NLP</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">Generative AI</div>
+						<!-- <div class="btn btn-white btn-outline-white py-3 px-4">R</div> -->
+						<!-- <div class="btn btn-white btn-outline-white py-3 px-4">Tableau</div> -->
+						<div class="btn btn-white btn-outline-white py-3 px-4">Power BI</div>
+						<!-- <div class="btn btn-white btn-outline-white py-3 px-4">QGIS</div> -->
+						<div class="btn btn-white btn-outline-white py-3 px-4">SQL</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">MySQL</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">PostgreSQL</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">Version Control (Git/GitHub)</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">Unix</div>
+						<div class="btn btn-white btn-outline-white py-3 px-4">MS Excel</div>
+					</div>
+				</div>
+			</div>
+			<br>
+	
+			<div class="row">
+				<div class="col-12">
+					<h2 class="big-5" style="color: #ffbd39;">Expertise</h2>
+					<!-- <h2 class="big-5">Expertise</h2> -->
+				</div>
+			</div>
+			<br>
+			<div class="row d-flex">
+				<div class="col-md-4 d-flex ftco-animate">
+					<div class="blog-entry justify-content-end">
+						<a  class="block-20 zoom-effect" style="background-image: url('images/sd2.jpg');">
+						</a>
+						<div class="text mt-3 float-right d-block">
+							<h3 class="heading">Data Scientist</h3>
+							<p>
+I apply data-driven techniques to extract insights and build predictive solutions using Python, SQL, and statistical analysis. My focus lies in transforming raw data into meaningful patterns that guide informed decision-making.
+</p>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 d-flex ftco-animate">
+					<div class="blog-entry justify-content-end">
+						<a class="block-20 zoom-effect" style="background-image: url('images/ml.jpg');">
+						</a>
+						<div class="text mt-3 float-right d-block">
+							<h3 class="heading">Machine learning Engineer</a></h3>
+							<p>
+I develop and optimize machine learning models using TensorFlow and Keras to solve real-world problems efficiently. My work emphasizes accuracy, automation, and continuous model improvement through experimentation.
+</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 d-flex ftco-animate">
+					<div class="blog-entry">
+						<a class="block-20 zoom-effect" style="background-image: url('images/data_science.jpg');">
+						</a>
+						<div class="text mt-3 float-right d-block">
+							<h3 class="heading">Data Analyst</a></h3>
+							<p>
+I specialize in analyzing complex datasets with tools like Power BI and Python to uncover trends and actionable insights. My approach combines data visualization and storytelling to drive clear, impactful business understanding.
+</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</section>
+	
+	<style>
+		.skills-container {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+		.btn {
+			margin: 5px;
+			text-align: center;
+		}
+	</style>
+	
+    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Contact</h1>
+            <h2 class="mb-4">Contact Me</h2>
+            <p>Below are the details to reach out to me!</p>
+          </div>
+        </div>
+
+        <div class="row d-flex contact-info mb-5">
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-map-signs"></span>
+          		</div>
+          		<h3 class="mb-4">Address</h3>
+	            <p>Chennai, India</p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-phone2"></span>
+          		</div>
+          		<h3 class="mb-4">Contact Number</h3>
+	            <p><a href="tel://0101010101">+91 9176602313</a></p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-paper-plane"></span>
+          		</div>
+          		<h3 class="mb-4">Email Address</h3>
+	            <p><a href="mailto:shubhangidabral1@gmail.com" target="_blank">madhu1412.goal@gmail.com</a></p>
+	          </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+          	<div class="align-self-stretch box p-4 text-center">
+          		<div class="icon d-flex align-items-center justify-content-center">
+          			<span class="icon-globe"></span>
+          		</div>
+          		<h3 class="mb-4">Download Resume</h3>
+	            <p><a href="https://drive.google.com/file/d/11pS3IbNFYuICT3DU_wXI211zRbSgkbGt/view?usp=sharing" target="_blank">resumelink</a></p>
+	          </div>
+          </div>
+
+		  <div class="container">
+			<br>
+			<br>
+			<div class="row justify-content-center">
+				<!-- <div class="col-md-7 ftco-animate text-center">
+					<h2>Have a<span> Question?  </span> <a href="https://forms.gle/uLaTShUKXraAvHJ77" class="btn btn-primary py-3 px-5">Click Here</a> </h2>
+				</div> -->
+			</div>
+				<br>
+					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
+					  <li class="ftco-animate normal-txt">Find me on  </li>
+					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/madhu-priya-5b1884255/" target="_blank"><span class="icon-linkedin"></span></a></li>  
+					  <li class="ftco-animate"><a href="https://x.com/madhupriya_c" target="_blank"><span class="icon-twitter"></span></a></li>
+					  <!-- <li class="ftco-animate"><a href="https://public.tableau.com/app/profile/sdabral/vizzes"><span class="icon-tableau"></span></a></li> -->
+				      <!-- <li class="ftco-animate"><a href="https://www.instagram.com/shubhangi.dabral/" target="_blank"><span class="icon-instagram"></span></a></li> -->
+					</ul>
+				<br>
+		   </div>
+   </div>
+ </section>
+
+
+ 
+	
+    <!-- <footer class="ftco-footer ftco-section">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-12 text-center">
+  
+			  <p>
+	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+</p>
+			</div>
+		  </div>
+		</div>
+	  </footer> -->
+
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>
