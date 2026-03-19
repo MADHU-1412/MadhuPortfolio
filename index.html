@@ -174,23 +174,46 @@
             color: #fff;box-shadow: 0 0 15px var(--neural-magenta);
         }
 
-        /* UPLINK UPGRADE */
+        /* RESPONSIVE FLUID TYPOGRAPHY */
+        h1.hero-glitch {
+            font-size: clamp(2.5rem, 10vw, 6rem) !important;
+            letter-spacing: clamp(5px, 2vw, 15px) !important;
+        }
+
         .uplink-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;letter-spacing: 12px;
+            font-family: 'Orbitron', sans-serif !important;
+            font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
+            letter-spacing: clamp(4px, 1vw, 12px) !important;
             background: linear-gradient(to right, var(--neural-cyan), var(--neural-magenta));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .latency-bar {
-            width: 150px;height: 2px;background: #111;margin: 20px auto;
-            position: relative;overflow: hidden;
+
+        .cyber-card {
+            padding: clamp(1rem, 4vw, 2.5rem) !important;
         }
-        .latency-fill {
-            width: 60%;height: 100%;background: var(--neural-cyan);
-            animation: ping 2s infinite alternate;
+
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 768px) {
+            #status-line {
+                bottom: 10px; left: 10px; font-size: 0.5rem;
+                flex-direction: column; gap: 5px;
+            }
+            .hud-overlay { border-width: 5px; }
+            .hero { padding-top: 80px; }
+            .cyber-card { height: auto !important; margin-bottom: 20px; }
+            .skill-node { padding: 5px 12px; font-size: 0.65rem; }
+            .nav-link { font-size: 0.7rem !important; margin: 10px 0; }
+            .navbar { padding: 0.5rem 0; }
+            .project-img-box { height: 150px; }
         }
+
+        /* Large Screen Layout Support */
+        @media (min-width: 1200px) {
+            .container { max-width: 1140px; }
+        }
+
         @keyframes ping { 0% { width: 10%; opacity: 0.2; } 100% { width: 90%; opacity: 1; } }
 
     </style>
