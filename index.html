@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Madhupriya | AI Engineering Command Center</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --primary-bg: #020206;
+            --neural-cyan: #00f2ff;
+            --neural-magenta: #ff00ea;
+            --neural-gold: #ffbd39;
+            --glass-border: rgba(0, 242, 255, 0.15);
+            --panel-bg: rgba(5, 5, 12, 0.9);
+        }
+
+        * { cursor: none !important; }
+
+        body {
+            background-color: var(--primary-bg);
+            color: #d0d0ff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            user-select: none;
+        }
+
+        #interactive-3d {
+            position: fixed;
+            top: 0;left: 0;width: 100%;height: 100vh;
+            z-index: -1;
+        }
+
+        /* CUSTOM CURSOR */
+        #cursor-ring {
+            width: 25px;height: 25px;
+            border: 1px solid var(--neural-cyan);
+            border-radius: 50%;
+            position: fixed;pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+            display: flex;align-items: center;justify-content: center;
+        }
+        #cursor-dot {
+            width: 4px;height: 4px;
+            background: var(--neural-magenta);
+            border-radius: 50%;
+            position: fixed;pointer-events: none;
+            z-index: 10001;
+        }
+        .cursor-active #cursor-ring {
+            width: 50px;height: 50px;
+            background: rgba(0, 242, 255, 0.15);
+            border-width: 2px;
+            border-color: var(--neural-magenta);
+        }
+
+        /* HUD & OVERLAYS */
+        .hud-overlay {
+            position: fixed;top: 0;left: 0;width: 100%;height: 100%;
+            pointer-events: none;z-index: 999;
+            border: 15px solid transparent;
+        }
+        .hud-line { position: absolute; background: rgba(0, 242, 255, 0.08); }
+        .line-v { width: 1px; height: 60px; }
+        .line-h { width: 60px; height: 1px; }
+        .l-tl { top: 0; left: 0; }
+        .l-tr { top: 0; right: 0; }
+        .l-bl { bottom: 0; left: 0; }
+        .l-br { bottom: 0; right: 0; }
+
+        .scanline {
+            width: 100%;height: 1px;
+            background: rgba(0, 242, 255, 0.05);
+            position: fixed;top: 0;z-index: 1000;
+            animation: scan 12s linear infinite;
+        }
+        @keyframes scan { from { top: -10%; } to { top: 110%; } }
+
+        /* STATUS LINE (NEW COMPACT LOG) */
+        #status-line {
+            position: fixed;bottom: 20px;left: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;color: var(--neural-cyan);
+            z-index: 1001;pointer-events: none;
+            opacity: 0.6;letter-spacing: 1px;
+            display: flex;gap: 15px;
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;display: flex;flex-direction: column;justify-content: center;align-items: center;
+        }
+        .hero-glitch {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;text-transform: uppercase;
+            position: relative;color: #fff;letter-spacing: 10px;
+        }
+        .hero-glitch:hover {
+            text-shadow: 0 0 30px var(--neural-cyan);
+        }
+
+        /* CARDS */
+        .cyber-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+            transform-style: preserve-3d;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        .cyber-card:hover {
+            border-color: var(--neural-cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+        }
+
+        .project-img-box {
+            width: 100%;height: 180px;
+            background-size: cover;background-position: center;
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            margin-bottom: 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+        }
+
+        /* TAGS VS BUTTONS */
+        .project-tags {
+            min-height: 50px;
+            display: flex;flex-wrap: wrap;justify-content: center;
+            margin-bottom: 25px;
+        }
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #888;
+            padding: 3px 10px;margin: 3px;
+            font-size: 0.65rem;border-radius: 2px;
+            font-family: 'JetBrains Mono';
+        }
+
+        .btn-cyber {
+            display: block;width: fit-content;margin: 0 auto;
+            border: 1px solid var(--neural-cyan);
+            background: transparent;color: var(--neural-cyan);
+            padding: 10px 35px;font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;letter-spacing: 2px;
+            transition: 0.3s;text-decoration: none !important;
+        }
+        .btn-cyber:hover {
+            background: var(--neural-cyan);color: #000;
+            box-shadow: 0 0 25px var(--neural-cyan);
+        }
+
+        .tech-grid {
+            display: flex;flex-wrap: wrap;justify-content: center;gap: 10px;padding: 20px;
+        }
+        .skill-node {
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            background: rgba(0, 242, 255, 0.05);
+            padding: 8px 20px;font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;color: var(--neural-cyan);
+            transition: 0.3s;
+        }
+        .skill-node:hover {
+            background: var(--neural-magenta);border-color: var(--neural-magenta);
+            color: #fff;box-shadow: 0 0 15px var(--neural-magenta);
+        }
+
+        /* UPLINK UPGRADE */
+        .uplink-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;letter-spacing: 12px;
+            background: linear-gradient(to right, var(--neural-cyan), var(--neural-magenta));
+            -webkit-background-clip: text;-webkit-text-fill-color: transparent;
+        }
+        .latency-bar {
+            width: 150px;height: 2px;background: #111;margin: 20px auto;
+            position: relative;overflow: hidden;
+        }
+        .latency-fill {
+            width: 60%;height: 100%;background: var(--neural-cyan);
+            animation: ping 2s infinite alternate;
+        }
+        @keyframes ping { 0% { width: 10%; opacity: 0.2; } 100% { width: 90%; opacity: 1; } }
+
+    </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target">
+
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+    <div class="scanline"></div>
+    <div class="hud-overlay">
+        <div class="hud-line line-v l-tl"></div><div class="hud-line line-h l-tl"></div>
+        <div class="hud-line line-v l-tr"></div><div class="hud-line line-h l-tr"></div>
+        <div class="hud-line line-v l-bl"></div><div class="hud-line line-h l-bl"></div>
+        <div class="hud-line line-v l-br"></div><div class="hud-line line-h l-br"></div>
+    </div>
+
+    <div id="status-line">
+        <span>> SYSTEM: STABLE</span>
+        <span id="coord-display">> COORDS: 0.00, 0.00</span>
+        <span id="latency-val">> LATENCY: 24MS</span>
+    </div>
+
+    <canvas id="interactive-3d"></canvas>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">MADHUPRIYA</a>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav nav ml-auto">
+                    <li class="nav-item"><a href="#home-section" class="nav-link"><span>01_HOME</span></a></li>
+                    <li class="nav-item"><a href="#about-section" class="nav-link"><span>02_DATA</span></a></li>
+                    <li class="nav-item"><a href="#project-section" class="nav-link"><span>03_NODES</span></a></li>
+                    <li class="nav-item"><a href="#skills-section" class="nav-link"><span>04_STK</span></a></li>
+                    <li class="nav-item"><a href="#contact-section" class="nav-link"><span>05_UPLINK</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home-section" class="hero">
+        <h1 class="hero-glitch" data-text="MADHUPRIYA">MADHUPRIYA</h1>
+        <div style="font-family: 'JetBrains Mono'; color: var(--neural-cyan); margin-top: 10px; font-size: 1.1rem; opacity: 0.8;">
+            [ <span id="typing-text"></span> ]
+        </div>
+        <div class="mt-5">
+            <a href="#project-section" class="btn-cyber">REVEAL_PROJECT_LOGS</a>
+        </div>
+    </section>
+
+    <section class="ftco-section mt-5" id="about-section">
+        <div class="container">
+            <div class="cyber-card">
+                <h2 style="color: #fff; letter-spacing: 5px;">// AGENT_PROFILE</h2>
+                <p class="mt-4" style="line-height: 1.8; opacity: 0.9;">I’m an AI/ML Engineer specializing in the architecture of high-performance intelligent systems. From GenAI-driven security to RAG pipelines and real-time LLM orchestration, I build software that learns and scales. My approach focuses on bridging the gap between raw research and production-grade AI infrastructure.</p>
+                <div class="row mt-5 text-center" style="font-family: 'Orbitron'; font-size: 0.8rem; color: var(--neural-cyan);">
+                    <div class="col-md-4 mb-3">[ LOC: CHENNAI_IN ]</div>
+                    <div class="col-md-4 mb-3">[ DEG: B.TECH_IT ]</div>
+                    <div class="col-md-4 mb-3">[ EXP: AI_ML_ENGG ]</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section" id="project-section">
+        <div class="container">
+            <h1 class="text-center mb-5" style="letter-spacing: 12px; font-weight: 900;">NODE_PROJECTS</h1>
+            <div class="row">
+                <!-- ZAP GUARD -->
+                <div class="col-md-4 d-flex">
+                    <div class="cyber-card text-center">
+                        <div class="project-img-box" style="background-image: url('images/project_zap.png');"></div>
+                        <h3 class="mb-3">ZAP Guard</h3>
+                        <p style="font-size: 0.75rem; opacity: 0.7; height: 60px;">AI Security platform for Zombie API Discovery & Automated Defence.</p>
+                        <div class="project-tags">
+                            <span class="tag-pill">AI SECURITY</span><span class="tag-pill">LLM</span><span class="tag-pill">DEVSECOPS</span>
+                            <span class="tag-pill">CLOUD</span><span class="tag-pill">THREAT DETECTION</span>
+                        </div>
+                        <a href="https://github.com/MADHU-1412/ZAP-Guard-PS9-Zombie-API-Discovery-Defence" target="_blank" class="btn-cyber">FETCH_SOURCE</a>
+                    </div>
+                </div>
+                <!-- MEETING MIND -->
+                <div class="col-md-4 d-flex">
+                    <div class="cyber-card text-center">
+                        <div class="project-img-box" style="background-image: url('images/project_meeting.png');"></div>
+                        <h3 class="mb-3">MeetingMind</h3>
+                        <p style="font-size: 0.75rem; opacity: 0.7; height: 60px;">Real-time AI Meeting Assistant for live transcription & LLM summarization.</p>
+                        <div class="project-tags">
+                            <span class="tag-pill">NLP</span><span class="tag-pill">REAL-TIME AI</span><span class="tag-pill">SPEECH PROC</span>
+                            <span class="tag-pill">SUMMARIZATION</span><span class="tag-pill">PRODUCTIVITY</span>
+                        </div>
+                        <a href="https://github.com/MADHU-1412/meetingmind-live" target="_blank" class="btn-cyber">FETCH_SOURCE</a>
+                    </div>
+                </div>
+                <!-- RAG DOC -->
+                <div class="col-md-4 d-flex">
+                    <div class="cyber-card text-center">
+                        <div class="project-img-box" style="background-image: url('images/project_rag.png');"></div>
+                        <h3 class="mb-3">RAG Doc Q&A</h3>
+                        <p style="font-size: 0.75rem; opacity: 0.7; height: 60px;">Intelligent document Q&A combining vector search with RAG architecture.</p>
+                        <div class="project-tags">
+                            <span class="tag-pill">RAG</span><span class="tag-pill">VECTOR DB</span><span class="tag-pill">LANGCHAIN</span>
+                            <span class="tag-pill">EMBEDDINGS</span><span class="tag-pill">SEMANTIC SEARCH</span>
+                        </div>
+                        <a href="https://github.com/MADHU-1412/RAG_Doc_QandA" target="_blank" class="btn-cyber">FETCH_SOURCE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section" id="skills-section">
+        <div class="container text-center">
+            <h1 class="mb-5" style="letter-spacing: 8px;">TECH_STACK_DUMP</h1>
+            <div class="cyber-card">
+                <div class="tech-grid">
+                    <span class="skill-node">Python</span><span class="skill-node">PyTorch</span><span class="skill-node">TensorFlow</span>
+                    <span class="skill-node">Hugging Face</span><span class="skill-node">LangChain</span><span class="skill-node">FastAPI</span>
+                    <span class="skill-node">OpenAI API</span><span class="skill-node">Anthropic</span><span class="skill-node">Vector DBs</span>
+                    <span class="skill-node">Pinecone</span><span class="skill-node">FAISS</span><span class="skill-node">MLOps</span>
+                    <span class="skill-node">Docker</span><span class="skill-node">Kubernetes</span><span class="skill-node">Computer Vision</span>
+                    <span class="skill-node">NLP</span><span class="skill-node">Generative AI</span><span class="skill-node">SQL</span>
+                    <span class="skill-node">PostgreSQL</span><span class="skill-node">Power BI</span><span class="skill-node">DVC</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section" id="contact-section">
+        <div class="container text-center">
+            <div class="cyber-card">
+                <h1 class="uplink-header">ESTABLISH_NEURAL_LINK</h1>
+                <div class="latency-bar"><div class="latency-fill"></div></div>
+                <p class="mt-4" style="font-family: 'JetBrains Mono'; opacity: 0.8;">madhu1412.goal@gmail.com</p>
+                <div class="mt-5 mb-5">
+                    <a href="https://www.linkedin.com/in/madhu-priya-5b1884255/" target="_blank" class="btn-cyber">LINKEDIN_MODULE</a>
+                    <a href="https://github.com/MADHU-1412" target="_blank" class="btn-cyber ml-md-3 mt-3 mt-md-0">GITHUB_MODULE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 text-center" style="opacity: 0.2; font-size: 0.6rem; font-family: 'JetBrains Mono';">
+        [ SYSTEM_RESERVED // MADHUPRIYA_AI_ENV_2026 ]
+    </footer>
+
+    <script>
+        // MOUSE LOGIC
+        const ring = document.getElementById('cursor-ring');
+        const dot = document.getElementById('cursor-dot');
+        const coordDisplay = document.getElementById('coord-display');
+        
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(ring, { x: e.clientX - 12.5, y: e.clientY - 12.5, duration: 0.4 });
+            gsap.to(dot, { x: e.clientX - 2, y: e.clientY - 2, duration: 0.1 });
+            coordDisplay.innerHTML = `> COORDS: ${e.clientX}, ${e.clientY}`;
+        });
+
+        document.querySelectorAll('a, .cyber-card, .skill-node').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        });
+
+        // 3D BACKGROUND
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('interactive-3d'), alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 2500;
+        const posArray = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) { posArray[i] = (Math.random() - 0.5) * 12; }
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({ size: 0.005, color: 0x00f2ff, transparent: true, opacity: 0.5 });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        camera.position.z = 3;
+
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5);
+            mouseY = (e.clientY / window.innerHeight - 0.5);
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particlesMesh.rotation.y += 0.001;
+            particlesMesh.rotation.y += (mouseX - particlesMesh.rotation.y) * 0.02;
+            particlesMesh.rotation.x += (-mouseY - particlesMesh.rotation.x) * 0.02;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // TYPING
+        const roles = ["AI_ENGINEER", "ML_MLOPS_EXPERT", "RAG_ARCHITECT", "LLM_DEVELOPER"];
+        let r_idx = 0; let c_idx = 0; let isDel = false;
+        function type() {
+            const el = document.getElementById('typing-text');
+            const cur = roles[r_idx];
+            el.innerHTML = isDel ? cur.substring(0, c_idx--) : cur.substring(0, c_idx++);
+            if (!isDel && c_idx > cur.length) { isDel = true; setTimeout(type, 2000); }
+            else if (isDel && c_idx < 0) { isDel = false; r_idx = (r_idx+1)%roles.length; setTimeout(type, 500); }
+            else { setTimeout(type, isDel ? 30 : 100); }
+        }
+        type();
+
+        // CARD TILT
+        document.querySelectorAll('.cyber-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const rotateX = (e.clientY - rect.top - rect.height/2) / 12;
+                const rotateY = (rect.left + rect.width/2 - e.clientX) / 12;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+            card.addEventListener('mouseleave', () => { card.style.transform = `none`; });
+        });
+    </script>
+</body>
+</html>
